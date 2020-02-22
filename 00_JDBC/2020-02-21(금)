@@ -1,0 +1,29 @@
+# jdbc 
+
+DriverManager
+- Class.forName(매개변수 : 내가 연결할 DBMS의 드라이버) 어떠한 DBMS랑 연결할지 지정해준다. 
+- 드라이버매니저 안에있는 DriverManager.getConnection()을 통해서 DBMS에 있는 계정에 접속할 정보를 저장하는 곳이 getConnection()
+- 데이터 원본에 JDBC드라이버를 통하여 커넥션을 만드는 역할
+
+- DriverManager.getConnection()의 반환 값은 Connection이다. 
+- Connection에는 연결한 DBMS 계정의 정보가 담겨져 있다.
+- SQL문장을 실행시키기 전에 우선 Connection 객체가 있어야 한다.
+- SQL쿼리문을 사용하기 위해서는 Connection 안에 있는 PreparedStatement(), createStatement() 메소드를 통해서 내가 보내고자 하는 쿼리문을 보낸다.
+- createStatement()의 반환 값은 Statement 이다.
+- PrepareStatement()의 반환값은 PreparedStatement 이다.
+
+- createStatement()는 보내고 싶은 쿼리문을 완성해서 보내준다.
+- PreparedStatement()는 보내고 싶은 쿼리문을 미완성해서 보내준다.
+
+ 
+- executeQuery() = select, 반환 값은 ResultSet
+- executeUpdate() = insert, update, delete (DML반환값은 숫자로 반환된다), 그래서 executeUpdate()반환 값은 int
+-    ==>  질의 문장(쿼리문)을 String 객체에 담아 인자로 전달(DB한테)
+
+
+- DriverManager.getConnection 어떤 계정 연결 반환 값으론 내가 연결한 계정에 대한 정보 connection() 반환
+- createStatment
+- 미완성된 PropareStatement 은 set자료형 (setString, setInteger 등등) setString(1,id) 첫번째 매개변수는 첫번째의 위치홀더(?)에 들어갈 값이고 두번째 매개변수는 보내줄 값을 넣어준다.
+
+
+ResulSet  
