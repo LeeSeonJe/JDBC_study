@@ -45,7 +45,7 @@ public class Menu {
 		for (Employee emp : empList) {
 			System.out.println(emp);
 		}
-	}
+	} 
 
 	public void displayError(String string) {
 		System.out.println("서비스 요청 실패 : " + string);
