@@ -21,7 +21,7 @@
         String id = "KH"; // 접속할 ID
         String pw = "KH"; // 접속할 PW
 
-        Class.forName("testJDBC.JDBCTest"); // 연결할 Class 경로
+        Class.forName("oracle.jdbc.driver.OracleDriver"); // 연결할 Class 경로
         conn = DriverManager.getConnection(url, id, pw);
 
         System.out.println("연결성공");
