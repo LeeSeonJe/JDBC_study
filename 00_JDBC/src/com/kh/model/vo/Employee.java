@@ -13,23 +13,39 @@ public class Employee {
 	private int deptNo;
 
 	public Employee() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public Employee(int empNo, String empName, String job, int mgr, Date hireDate, int sal, int comm, int deptNo) {
-
+		this.empNo = empNo;
+		this.empName = empName;
+		this.job = job;
+		this.mgr = mgr;
+		this.hireDate = hireDate;
+		this.sal = sal;
+		this.comm = comm;
+		this.deptNo = deptNo;
 	}
 
 	public Employee(int empNo, String empName, String job, int mgr, int sal, int comm, int deptNo) {
-
+		this.empNo = empNo;
+		this.empName = empName;
+		this.job = job;
+		this.mgr = mgr;
+		this.sal = sal;
+		this.comm = comm;
+		this.deptNo = deptNo;
 	}
 
 	public Employee(int empNo, String job, int sal, int comm) {
-
+		this(job, sal, comm);
+		this.empNo = empNo;
 	}
 
 	public Employee(String job, int sal, int comm) {
-
+		this.job = job;
+		this.sal = sal;
+		this.comm = comm;
 	}
 
 	public int getEmpNo() {
