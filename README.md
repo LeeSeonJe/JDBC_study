@@ -53,7 +53,7 @@
 
   ```
 
-### eclipse git push Error
+### eclipse git push Error - "rejected -non-fast-forword"
 + 원인
   + Repositories를 생성후에 JDBC파일을 push하는 과정에서 오류가 난 것 같다.  
   무엇을 잘못했는지 정확히는 파악하지 못하였다.
