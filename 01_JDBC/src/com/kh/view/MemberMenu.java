@@ -29,7 +29,7 @@ public class MemberMenu {
 			} else if (input == 3) {
 				mc.selectMember();
 			} else if (input == 4) {
-
+				mc.updateMember();
 			} else if (input == 5) {
 				mc.deleteMember();
 			} else if (input == 0) {
@@ -123,7 +123,7 @@ public class MemberMenu {
 	}
 
 	public String checkMemberId() {
-		System.out.print("삭제할 아이디를 입력하세요 : ");
+		System.out.print("아이디를 입력하세요 : ");
 		String id = sc.nextLine();
 		return id;
 	}
@@ -132,5 +132,28 @@ public class MemberMenu {
 		System.out.print("비밀번호 입력를 입력하세요 : ");
 		String pwd = sc.nextLine();
 		return pwd;
+	}
+
+	public Member updateMember() {
+		System.out.println("*** 회원 정보 수정 ***");
+		System.out.print("회원 아이디 : ");
+		String memberId = sc.nextLine();
+		System.out.print("비밀번호 : ");
+		String memberPwd = sc.nextLine();
+		System.out.print("이름 : ");
+		String memberName = sc.nextLine();
+		System.out.print("성별(남:M, 여:F) : ");
+		char gender = sc.nextLine().toUpperCase().charAt(0);
+		System.out.print("이메일 : ");
+		String email = sc.nextLine();
+		System.out.print("전화번호(-포함) : ");
+		String phone = sc.nextLine();
+		System.out.print("나이 : ");
+		int age = Integer.parseInt(sc.nextLine());
+		System.out.print("주소 : ");
+		String address = sc.nextLine();
+
+		Member member = new Member(memberId, memberPwd, memberName, gender, email, phone, age, address);
+		return member;
 	}
 }

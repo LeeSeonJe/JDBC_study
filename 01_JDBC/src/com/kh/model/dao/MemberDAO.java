@@ -41,8 +41,8 @@ public class MemberDAO {
 
 //		실제로 DAO가 처리해야하는 업무 : 3번 (SQL문을 DB로 전달하여 실행하고 반환 값 받아오기)
 //		--> 1, 2, 4, 5번 업무 분담 : com.kh.common.JDBCTemplate을 만들어서 분담 시킬 것이다.
-		String query = prop.getProperty("insertMember");
 		PreparedStatement pstmt = null;
+		String query = prop.getProperty("insertMember");
 		int result = 0;
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -171,7 +171,6 @@ public class MemberDAO {
 		} finally {
 			close(rset);
 			close(pstmt);
-			close(conn);
 		}
 		return mList;
 	}
@@ -186,36 +185,75 @@ public class MemberDAO {
 			rset = pstmt.executeQuery();
 			if (rset.next() && rset.getString("member_id").equals(id)) {
 				return true;
-			} else {
-				return false;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(rset);
 			close(pstmt);
-//			close(conn);
 		}
 		return false;
 	}
 
-	public int checkMemberPwd(Connection conn, String id, String pwd) {
+	public boolean checkMemberPwd(Connection conn, String id, String pwd) {
 		PreparedStatement pstmt = null;
-		int result = 0;
+		ResultSet rset = null;
 		String query = prop.getProperty("checkMemberPwd");
 
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, id);
 			pstmt.setString(2, pwd);
-
-			result = pstmt.executeUpdate();
-			System.out.println(result);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				return true;
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
-			close(conn);
+		}
+		return false;
+	}
+
+	public int deleteMember(Connection conn, String id, String pwd) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("deleteMember");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			pstmt.setString(2, pwd);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateMember(Connection conn, String id, Member member) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("updateMember");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, member.getMemberId());
+			pstmt.setString(2, member.getMemberPwd());
+			pstmt.setString(3, member.getMemberName());
+			pstmt.setString(4, member.getGender() + "");
+			pstmt.setString(5, member.getEmail());
+			pstmt.setString(6, member.getPhone());
+			pstmt.setInt(7, member.getAge());
+			pstmt.setString(8, member.getAddress());
+			pstmt.setString(9, id);
+
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return result;
 	}

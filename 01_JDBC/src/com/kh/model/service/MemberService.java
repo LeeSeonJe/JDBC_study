@@ -1,5 +1,6 @@
 package com.kh.model.service;
 
+import static com.kh.common.JDBCTemplate.close;
 import static com.kh.common.JDBCTemplate.commit;
 import static com.kh.common.JDBCTemplate.getConnection;
 import static com.kh.common.JDBCTemplate.rollback;
@@ -55,14 +56,28 @@ public class MemberService {
 	public boolean checkMemberId(String id) {
 		Connection conn = getConnection();
 		MemberDAO mDAO = new MemberDAO();
-		return mDAO.checkMemberId(conn, id);
+		boolean bool = mDAO.checkMemberId(conn, id);
+		return bool;
 	}
 
-	public int checkMemberPwd(String id, String pwd) {
+	public boolean checkMemberPwd(String id, String pwd) {
 		Connection conn = getConnection();
 		MemberDAO mDAO = new MemberDAO();
-		int result = mDAO.checkMemberPwd(conn, id, pwd);
+		boolean bool = mDAO.checkMemberPwd(conn, id, pwd);
+		return bool;
+	}
 
+	public int deleteMember(String id, String pwd) {
+		Connection conn = getConnection();
+		MemberDAO mDAO = new MemberDAO();
+		int result = mDAO.deleteMember(conn, id, pwd);
+		return result;
+	}
+
+	public int updateMember(String id, Member member) {
+		Connection conn = getConnection();
+		MemberDAO mDAO = new MemberDAO();
+		int result = mDAO.updateMember(conn, id, member);
 		if (result > 0) {
 			commit(conn);
 		} else {
