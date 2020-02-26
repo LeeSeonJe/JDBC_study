@@ -31,7 +31,7 @@ public class MemberMenu {
 			} else if (input == 4) {
 
 			} else if (input == 5) {
-
+				mc.deleteMember();
 			} else if (input == 0) {
 				System.out.println("프로그램 종료");
 				break;
@@ -73,14 +73,19 @@ public class MemberMenu {
 	}
 
 	public void displayMember(ArrayList<Member> mList) {
-		System.out.printf("%-10s %-10s %-5s %-5s %-20s %-15s %-4s %-20s %-15s\n", "ID", "PWD", "NAME", "GENDER",
+		System.out.printf("%-10s %-10s %-5s %-10s %-20s %-15s %-4s %-20s %-15s\n", "ID", "PWD", "NAME", "GENDER",
 				"EMAIL", "PHONE", "AGE", "ADDRESS", "ENROLLDATE");
 
 		for (Member m : mList) {
-			System.out.printf("%-10s %-10s %-5s %-5s %-20s %-15s %-4s %-20s %-15s\n", m.getMemberId(), m.getMemberPwd(),
-					m.getMemberName(), m.getGender(), m.getEmail(), m.getPhone(), m.getAge(), m.getAddress(),
-					m.getEnrollDate());
+			System.out.printf("%-10s %-10s %-5s %-10s %-20s %-15s %-4s %-20s %-15s\n", m.getMemberId(),
+					m.getMemberPwd(), m.getMemberName(), m.getGender(), m.getEmail(), m.getPhone(), m.getAge(),
+					m.getAddress(), m.getEnrollDate());
 		}
+
+//		for (int i = 0; i < mList.size(); i++) {
+//			System.out.println(mList.get(i));
+//		}
+		// Member class에서 작성한 toString을 사용하는 for문
 	}
 
 	public int selectMember() {
@@ -115,5 +120,17 @@ public class MemberMenu {
 		System.out.print("조회할 성별 입력(남:M / 여:F) : ");
 		char gen = sc.nextLine().toUpperCase().charAt(0);
 		return gen;
+	}
+
+	public String checkMemberId() {
+		System.out.print("삭제할 아이디를 입력하세요 : ");
+		String id = sc.nextLine();
+		return id;
+	}
+
+	public String checkMemberPwd() {
+		System.out.print("비밀번호 입력를 입력하세요 : ");
+		String pwd = sc.nextLine();
+		return pwd;
 	}
 }

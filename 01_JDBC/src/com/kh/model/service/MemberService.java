@@ -51,4 +51,23 @@ public class MemberService {
 		ArrayList<Member> mList = mDAO.selectGender(conn, gender);
 		return mList;
 	}
+
+	public boolean checkMemberId(String id) {
+		Connection conn = getConnection();
+		MemberDAO mDAO = new MemberDAO();
+		return mDAO.checkMemberId(conn, id);
+	}
+
+	public int checkMemberPwd(String id, String pwd) {
+		Connection conn = getConnection();
+		MemberDAO mDAO = new MemberDAO();
+		int result = mDAO.checkMemberPwd(conn, id, pwd);
+
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		return result;
+	}
 }

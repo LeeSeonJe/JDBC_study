@@ -112,9 +112,9 @@ public class MemberDAO {
 			stmt = conn.createStatement();
 			query += " '%" + id + "%'";
 			rset = stmt.executeQuery(query);
-			
+
 			mList = new ArrayList<Member>();
-			
+
 			while (rset.next()) {
 				String memberId = rset.getString("member_id");
 				String memberPwd = rset.getString("member_pwd");
@@ -149,7 +149,7 @@ public class MemberDAO {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, gender + "");
 			rset = pstmt.executeQuery();
-			
+
 			mList = new ArrayList<Member>();
 			while (rset.next()) {
 				String memberId = rset.getString("member_id");
@@ -168,8 +168,55 @@ public class MemberDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+			close(conn);
 		}
 		return mList;
 	}
 
+	public boolean checkMemberId(Connection conn, String id) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("checkMemberId");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			rset = pstmt.executeQuery();
+			if (rset.next() && rset.getString("member_id").equals(id)) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+//			close(conn);
+		}
+		return false;
+	}
+
+	public int checkMemberPwd(Connection conn, String id, String pwd) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("checkMemberPwd");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			pstmt.setString(2, pwd);
+
+			result = pstmt.executeUpdate();
+			System.out.println(result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(conn);
+		}
+		return result;
+	}
 }
