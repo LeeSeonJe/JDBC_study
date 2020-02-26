@@ -1,6 +1,5 @@
 package com.kh.model.service;
 
-import static com.kh.common.JDBCTemplate.close;
 import static com.kh.common.JDBCTemplate.commit;
 import static com.kh.common.JDBCTemplate.getConnection;
 import static com.kh.common.JDBCTemplate.rollback;
