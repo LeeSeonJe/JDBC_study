@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
@@ -63,7 +64,14 @@ public class BoardDAO {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String query = prop.getProperty("insertBoard");
-		pstmt = conn.prepareStatement(null);
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, b.getTitle());
+			pstmt.setString(2, b.getContent());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
