@@ -54,9 +54,9 @@ public class View {
 				} else if (select == 4) {
 					bc.insertBoard();
 				} else if (select == 5) {
-					bc.updateBoard();
+					bc.updateBoard(mem.getMemberId());
 				} else if (select == 6) {
-					bc.deleteBoard();
+					bc.deleteBoard(mem.getMemberId());
 				} else if (select == 0) {
 					System.out.println("프로그램 종료.");
 					break;
@@ -89,7 +89,7 @@ public class View {
 	public void selectAll(ArrayList<Board> bList) {
 		System.out.printf("%-3s %-15s %-10s %-15s\n", "BNO", "TITLE", "WRITER", "CREATE_DATE");
 		for (Board b : bList) {
-			System.out.printf("%-3s %-15s %-10s %-15s\\n", b.getbNo(), b.getTitle(), b.getWriter(), b.getCreateDate());
+			System.out.printf("%-3s %-15s %-10s %-15s\n", b.getbNo(), b.getTitle(), b.getWriter(), b.getCreateDate());
 		}
 	}
 
@@ -108,7 +108,7 @@ public class View {
 		System.out.println("--------------------------------------");
 		System.out.println("글 번호 : " + board.getbNo());
 		System.out.println("제목 : " + board.getTitle());
-		System.out.printf("작성자 : %-10s 작성일 %-15s", board.getWriter(), board.getCreateDate());
+		System.out.printf("작성자 : %-10s 작성일 %-15s\n", board.getWriter(), board.getCreateDate());
 		System.out.println("--------------------------------------");
 		System.out.println(board.getContent());
 		System.out.println("--------------------------------------");
@@ -147,7 +147,7 @@ public class View {
 			str.delete(0, str.capacity());
 			str.append(sc.nextLine());
 
-			if (str.toString().toUpperCase().equals("exit")) {
+			if (str.toString().toLowerCase().equals("exit")) {
 				break;
 			}
 			content.append(str);
